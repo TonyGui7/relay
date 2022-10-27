@@ -2098,6 +2098,7 @@ impl EnvelopeProcessorService {
     }
 
     fn handle_process_envelope(&self, message: ProcessEnvelope) {
+        relay_log::info!("handle_process_envelope started {:?}", message);
         let project_key = message.envelope.meta().public_key();
         let wait_time = message.envelope_context.start_time().elapsed();
         metric!(timer(RelayTimers::EnvelopeWaitTime) = wait_time);
